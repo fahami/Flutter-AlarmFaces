@@ -28,17 +28,28 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   android_alarm_manager: ^2.0.2
+  charts_flutter:
+    git:
+      url: git://github.com/google/charts.git
+      path: charts_flutter
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
   flutter_local_notifications: ^9.0.0
+  hive: ^2.0.4
+  hive_flutter: ^1.1.0
   intl: ^0.17.0
+  path_provider: ^2.0.5
   rxdart: ^0.27.2
+  syncfusion_flutter_charts: ^19.3.46
+  syncfusion_flutter_core: ^19.3.46
 
 dev_dependencies:
+  build_runner: ^2.1.4
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
+  hive_generator: ^1.1.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
