@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:alarmfaces/helpers/db_helper.dart';
 import 'package:alarmfaces/history.dart';
 import 'package:android_alarm_manager/android_alarm_manager.dart';
 import 'package:flutter/foundation.dart';
@@ -20,7 +21,7 @@ void main() async {
   Hive
     ..init(dir.path)
     ..registerAdapter(AlarmAdapter())
-    ..openBox<AlarmAdapter>('alarm');
+    ..openBox<Alarm>('alarm');
   runApp(MyApp());
 }
 
@@ -32,16 +33,44 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey(debugLabel: "Main Navigator");
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     NotificationHelper.init();
+    listenNotifications();
+  }
+
+  void listenNotifications() =>
+      NotificationHelper.onNotifications.stream.listen(onClickedNotification);
+
+  void onClickedNotification(String? payload) {
+    print(payload);
+    final DateTime dateTimeAlarm =
+        DateFormat('yyyy-MM-dd hh:mm:ss').parse(payload!);
+    final DateTime dateTimeOpen = DateTime.now();
+    final int differenceDate = dateTimeOpen.difference(dateTimeAlarm).inSeconds;
+    print(dateTimeAlarm);
+    print(dateTimeOpen);
+    print(differenceDate);
+    Boxes.getAlarm().add(Alarm(dateTimeAlarm, differenceDate));
+    this.navigatorKey.currentState!.push(
+          MaterialPageRoute(
+            builder: (context) => HistoryAlarm(
+              history: Alarm(dateTimeAlarm, differenceDate),
+            ),
+          ),
+        );
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Home());
+    return MaterialApp(
+      home: Home(),
+      navigatorKey: navigatorKey,
+    );
   }
 }
 
@@ -89,9 +118,16 @@ class ClockPainter extends CustomPainter {
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   Color colorDial = Colors.amber;
+
   final ValueNotifier<DateTime> _dateTime = ValueNotifier(DateTime.now());
 
   String alarmText(DateTime date) {
@@ -232,5 +268,12 @@ class Home extends StatelessWidget {
         ),
       ),
     ));
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    Hive.close();
   }
 }

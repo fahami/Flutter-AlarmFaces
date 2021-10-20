@@ -1,3 +1,4 @@
+import 'package:alarmfaces/models/alarm.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -26,6 +27,9 @@ class NotificationHelper {
     final settings = InitializationSettings(android: android, iOS: ios);
     await _notifications.initialize(
       settings,
+      onSelectNotification: (payload) async {
+        onNotifications.add(payload);
+      },
     );
   }
 
@@ -33,11 +37,13 @@ class NotificationHelper {
     int id = 0,
     String? title,
     String? body,
+    String? payload,
   }) async =>
       _notifications.show(
         id,
         title,
         body,
         await _notificationDetails(),
+        payload: payload,
       );
 }

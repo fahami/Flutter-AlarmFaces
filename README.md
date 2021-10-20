@@ -4,15 +4,18 @@ Sebuah aplikasi alarm dengan tampilan jam tangan tradisional yang dapat anda atu
 
 # Tampilan
 
-![Tampilan Alarm](https://i.ibb.co/st43gtP/Screen-Shot-2021-10-14-at-20-48-25.png)
+| Beranda                                              | Riwayat Alarm                                          |
+| ---------------------------------------------------- | ------------------------------------------------------ |
+| ![Tampilan Alarm](https://i.ibb.co/71dmKBk/home.jpg) | ![Riwayat Alarm](https://i.ibb.co/zfMCdFh/history.jpg) |
 
 ## Cara menggunakan
 
- 1. Buka Aplikasi AlarmFaces
- 2. Putar knob warna coklat sebelah kanan jam, geser ke kiri-kanan untuk mengatur menit dan atas-bawah untuk mengatur jam
- 3. Alarm akan menampilkan sesuai dengan waktu yang anda pilih
- 4. Jika sudah sesuai dengan waktu yang anda tentukan, klik tombol set alarm
- 5. AlarmFaces akan berjalan dilatarbelakang dan akan membunyikan nada dering ketika waktu yang diatur telah tiba.
+1. Buka Aplikasi AlarmFaces
+2. Putar knob warna coklat sebelah kanan jam, geser ke kiri-kanan untuk mengatur menit dan atas-bawah untuk mengatur jam
+3. Alarm akan menampilkan sesuai dengan waktu yang anda pilih
+4. Jika sudah sesuai dengan waktu yang anda tentukan, klik tombol set alarm
+5. AlarmFaces akan berjalan dilatarbelakang dan akan membunyikan nada dering ketika waktu yang diatur telah tiba.
+6. Ketika notifikasi dibuka, akan diarahkan menuju halaman riwayat alarm. Disajikan data durasi respon terhadap alarm dalam bentuk grafik batang
 
 ## Demonstrasi
 

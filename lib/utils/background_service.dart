@@ -24,10 +24,10 @@ class BackgroundService {
     print('Alarm fired!');
     final NotificationHelper _notificationHelper = NotificationHelper();
     await _notificationHelper.showNotification(
-      title: 'Alarm berakhir!',
-      body:
-          'Alarm anda telah bunyi di ${DateFormat.Hm().format(DateTime.now())}',
-    );
+        title: 'Alarm berakhir!',
+        body:
+            'Alarm anda telah bunyi di ${DateFormat.Hms().format(DateTime.now())}',
+        payload: DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()));
 
     _uiSendPort ??= IsolateNameServer.lookupPortByName(_isolateName);
     _uiSendPort?.send(null);
